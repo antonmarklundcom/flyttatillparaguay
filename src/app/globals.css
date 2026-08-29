@@ -1,0 +1,252 @@
+@import "tailwindcss";
+
+/* =========================================================================
+   Design-tokens — flyttatillparaguay.se
+   Fastställda i fas opus-1 enligt plan.md §3D. Senare faser ÄRVER dessa och
+   får inte ändra dem (§4.7). Lägg till nya tokens hellre än att ändra befintliga.
+   Känsla: varm, redaktionell, premium-personlig. Solljus, jord, grönska.
+   ========================================================================= */
+
+@theme {
+  /* --- Palett: djup skogsgrön (primär) ------------------------------- */
+  --color-forest-50: #f2f7f3;
+  --color-forest-100: #e0ece3;
+  --color-forest-200: #c1d9c8;
+  --color-forest-300: #96bda2;
+  --color-forest-400: #669a78;
+  --color-forest-500: #457c59;
+  --color-forest-600: #326244;
+  --color-forest-700: #284e37;
+  --color-forest-800: #1f3d2b;
+  --color-forest-900: #17301f;
+  --color-forest-950: #0d1c13;
+
+  /* --- Palett: terracotta (accent/CTA) ------------------------------- */
+  --color-clay-50: #fdf5f1;
+  --color-clay-100: #fae7dd;
+  --color-clay-200: #f4cbb7;
+  --color-clay-300: #eaa886;
+  --color-clay-400: #dd845c;
+  --color-clay-500: #c9633c;
+  --color-clay-600: #ae4e2c;
+  --color-clay-700: #8c3d24;
+  --color-clay-800: #6d3020;
+  --color-clay-900: #57281d;
+
+  /* --- Palett: varm cream / sand (bakgrunder, ytor, linjer) ---------- */
+  --color-sand-50: #fdfaf5;
+  --color-sand-100: #fbf7f0;
+  --color-sand-200: #f4ece0;
+  --color-sand-300: #e8dcc9;
+  --color-sand-400: #d6c5ab;
+  --color-sand-500: #b9a488;
+
+  /* --- Palett: mörkbrun text ----------------------------------------- */
+  --color-ink-400: #8b7f70;
+  --color-ink-500: #6b5f51;
+  --color-ink-700: #453a2e;
+  --color-ink-800: #2f261d;
+  --color-ink-900: #241c15;
+
+  /* --- Semantiska alias — använd DESSA i komponenter ------------------ */
+  --color-background: var(--color-sand-100);
+  --color-surface: #ffffff;
+  --color-surface-muted: var(--color-sand-200);
+  --color-border: var(--color-sand-300);
+  --color-border-strong: var(--color-sand-400);
+  --color-foreground: var(--color-ink-700);
+  --color-heading: var(--color-ink-900);
+  --color-muted: var(--color-ink-500);
+  --color-subtle: var(--color-ink-400);
+  --color-primary: var(--color-forest-800);
+  --color-primary-hover: var(--color-forest-700);
+  --color-on-primary: var(--color-sand-50);
+  --color-accent: var(--color-clay-500);
+  --color-accent-hover: var(--color-clay-600);
+  --color-on-accent: #ffffff;
+
+  /* --- Typografi ------------------------------------------------------ */
+  --font-display: var(--font-fraunces), ui-serif, Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Redaktionell displayskala (~1.25), rubriker sätts i clamp för mobil-först */
+  --text-display-xl: clamp(2.75rem, 1.6rem + 4.6vw, 5rem);
+  --text-display-xl--line-height: 1.03;
+  --text-display-xl--letter-spacing: -0.022em;
+  --text-display-lg: clamp(2.25rem, 1.5rem + 3vw, 3.75rem);
+  --text-display-lg--line-height: 1.06;
+  --text-display-lg--letter-spacing: -0.02em;
+  --text-display-md: clamp(1.875rem, 1.35rem + 2.1vw, 2.75rem);
+  --text-display-md--line-height: 1.12;
+  --text-display-md--letter-spacing: -0.018em;
+  --text-display-sm: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+  --text-display-sm--line-height: 1.2;
+  --text-display-sm--letter-spacing: -0.014em;
+  --text-lead: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
+  --text-lead--line-height: 1.6;
+
+  /* --- Radie ---------------------------------------------------------- */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+
+  /* --- Skuggor (varma, aldrig blåsvarta) ------------------------------ */
+  --shadow-card: 0 1px 2px rgb(36 28 21 / 0.04), 0 8px 24px -12px rgb(36 28 21 / 0.14);
+  --shadow-lift: 0 2px 4px rgb(36 28 21 / 0.05), 0 18px 40px -18px rgb(36 28 21 / 0.22);
+
+  /* --- Layoutmått ----------------------------------------------------- */
+  --container-content: 46rem;
+  --container-site: 76rem;
+}
+
+/* =========================================================================
+   Bas
+   ========================================================================= */
+
+/* Basstilarna MÅSTE ligga i @layer base. Olagrad CSS vinner över allt i ett
+   cascade layer, så ett olagrat `h2 { color: ... }` hade slagit ut varje
+   text-färgsutility på en rubrik — t.ex. text-sand-50 på mörk bakgrund. */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "kern", "liga";
+  }
+
+  h1, h2, h3, h4 {
+    color: var(--color-heading);
+    font-family: var(--font-display);
+    font-weight: 500;
+    text-wrap: balance;
+  }
+}
+
+::selection {
+  background-color: var(--color-clay-200);
+  color: var(--color-ink-900);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-forest-600);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* =========================================================================
+   Redaktionell brödtext — används av MDX-guider och legal-sidor.
+   Hand-rullad i stället för @tailwindcss/typography så att varje värde
+   kommer från tokens ovan.
+   ========================================================================= */
+
+.prose {
+  color: var(--color-foreground);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+}
+.prose > * + * { margin-block-start: 1.25em; }
+.prose h2 {
+  font-size: var(--text-display-sm);
+  line-height: var(--text-display-sm--line-height);
+  letter-spacing: var(--text-display-sm--letter-spacing);
+  margin-block-start: 2.25em;
+  scroll-margin-top: 6rem;
+}
+.prose h3 {
+  font-size: 1.375rem;
+  line-height: 1.3;
+  margin-block-start: 1.9em;
+  scroll-margin-top: 6rem;
+}
+.prose h2 + *, .prose h3 + * { margin-block-start: 0.75em; }
+.prose strong { color: var(--color-ink-900); font-weight: 600; }
+.prose a {
+  color: var(--color-forest-700);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  text-decoration-color: var(--color-forest-300);
+}
+.prose a:hover { text-decoration-color: var(--color-forest-600); }
+.prose ul, .prose ol { padding-inline-start: 1.35em; }
+.prose ul { list-style: disc; }
+.prose ol { list-style: decimal; }
+.prose li::marker { color: var(--color-clay-500); }
+.prose li + li { margin-block-start: 0.4em; }
+.prose blockquote {
+  border-inline-start: 3px solid var(--color-clay-400);
+  padding-inline-start: 1.25rem;
+  font-family: var(--font-display);
+  font-size: 1.1875rem;
+  font-style: italic;
+  color: var(--color-ink-800);
+}
+.prose hr {
+  border: 0;
+  border-top: 1px solid var(--color-border);
+  margin-block: 2.5em;
+}
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+}
+.prose th, .prose td {
+  border-bottom: 1px solid var(--color-border);
+  padding: 0.625rem 0.75rem;
+  text-align: start;
+  vertical-align: top;
+}
+.prose th { color: var(--color-heading); font-weight: 600; }
+.prose code {
+  background-color: var(--color-sand-200);
+  border-radius: var(--radius-sm);
+  padding: 0.1em 0.35em;
+  font-size: 0.9em;
+}
+.prose figure figcaption {
+  margin-block-start: 0.6em;
+  font-size: 0.875rem;
+  color: var(--color-muted);
+}
+
+/* =========================================================================
+   Subtil scroll-motion (§3D) — aldrig på LCP-element.
+   ========================================================================= */
+
+@keyframes fp-rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+
+.fp-reveal { opacity: 0; }
+.fp-reveal[data-revealed="true"] {
+  animation: fp-rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Utan JavaScript kör ingen IntersectionObserver och inget blir någonsin
+   avslöjat — då måste innehållet vara synligt från början. `scripting: none`
+   täcker moderna webbläsare; <noscript>-regeln i layouten täcker resten. */
+@media (scripting: none) {
+  .fp-reveal { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fp-reveal, .fp-reveal[data-revealed="true"] { opacity: 1; animation: none; }
+}
