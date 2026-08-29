@@ -66,6 +66,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {strings.nav.skipToContent}
         </a>
 
+        <noscript>
+          {/* Se .fp-reveal i globals.css — scroll-avslöjandet kräver JS. */}
+          <style>{".fp-reveal{opacity:1!important;animation:none!important}"}</style>
+        </noscript>
+
         <SiteHeader />
         <main id="innehall" className="flex-1">
           {children}

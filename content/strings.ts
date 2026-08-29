@@ -104,12 +104,6 @@ export const strings = {
     action: "Till startsidan",
   },
 
-  thanks: {
-    title: "Tack — jag har fått ditt meddelande.",
-    body: "Jag läser allt själv och svarar oftast inom ett dygn. Vill du ha svar snabbare går det alltid fortast på WhatsApp.",
-    action: "Tillbaka till startsidan",
-  },
-
   /** Platshållarnotis som syns i utvecklingsläge när en §7-input saknas. */
   placeholders: {
     image: "Bildslot — fylls i fas sonnet-4",

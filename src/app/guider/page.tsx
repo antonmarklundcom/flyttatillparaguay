@@ -5,6 +5,7 @@ import { CtaBlock } from "@/components/marketing/CtaBlock";
 import { GuideIndex } from "@/components/marketing/GuideIndex";
 import { PageHero } from "@/components/marketing/PageHero";
 import { JsonLd } from "@/components/ui/JsonLd";
+import { toGuideSummary } from "@/lib/content";
 import { getGuides } from "@/lib/mdx";
 import { breadcrumbSchema, buildMetadata } from "@/lib/seo";
 
@@ -15,7 +16,7 @@ export const metadata = buildMetadata({
 });
 
 export default function GuiderPage() {
-  const guides = getGuides();
+  const guides = getGuides().map(toGuideSummary);
 
   return (
     <>

@@ -66,3 +66,36 @@ export function readingMinutes(body: string): number {
   const words = body.trim().split(/\s+/).filter(Boolean).length;
   return Math.max(1, Math.round(words / 200));
 }
+
+/**
+ * Det ett artikelkort behöver — utan brödtexten.
+ *
+ * Klientkomponenter (t.ex. clusterfiltret på /guider) ska ALLTID få den här
+ * formen, aldrig hela `Guide`: annars serialiseras varje artikels body ner
+ * till webbläsaren.
+ */
+export type GuideSummary = {
+  slug: string;
+  title: string;
+  description: string;
+  cluster: Cluster;
+  publishedAt: string;
+  updatedAt: string;
+  heroImage: string | null;
+  draft: boolean;
+  readingMinutes: number;
+};
+
+export function toGuideSummary(guide: Guide): GuideSummary {
+  return {
+    slug: guide.slug,
+    title: guide.frontmatter.title,
+    description: guide.frontmatter.description,
+    cluster: guide.frontmatter.cluster,
+    publishedAt: guide.frontmatter.publishedAt,
+    updatedAt: guide.frontmatter.updatedAt,
+    heroImage: guide.frontmatter.heroImage,
+    draft: guide.frontmatter.draft,
+    readingMinutes: guide.readingMinutes,
+  };
+}

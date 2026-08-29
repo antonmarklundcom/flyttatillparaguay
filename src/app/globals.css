@@ -240,6 +240,13 @@
   animation: fp-rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+/* Utan JavaScript kör ingen IntersectionObserver och inget blir någonsin
+   avslöjat — då måste innehållet vara synligt från början. `scripting: none`
+   täcker moderna webbläsare; <noscript>-regeln i layouten täcker resten. */
+@media (scripting: none) {
+  .fp-reveal { opacity: 1; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .fp-reveal, .fp-reveal[data-revealed="true"] { opacity: 1; animation: none; }
 }

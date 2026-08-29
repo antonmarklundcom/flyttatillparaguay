@@ -20,9 +20,17 @@ export function SiteHeader() {
   const toggle = () => setOpenedFor(open ? null : pathname);
 
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
+    if (!open) return;
+
+    document.body.style.overflow = "hidden";
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpenedFor(null);
+    };
+    document.addEventListener("keydown", onKeyDown);
+
     return () => {
       document.body.style.overflow = "";
+      document.removeEventListener("keydown", onKeyDown);
     };
   }, [open]);
 

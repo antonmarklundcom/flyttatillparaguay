@@ -9,6 +9,7 @@ import { PageHero } from "@/components/marketing/PageHero";
 import { ImageSlot } from "@/components/ui/ImageSlot";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { toGuideSummary } from "@/lib/content";
 import { getCities, getGuidesByCluster } from "@/lib/mdx";
 import { breadcrumbSchema, buildMetadata } from "@/lib/seo";
 
@@ -32,7 +33,7 @@ const topics = [
 
 export default function LivetIParaguayPage() {
   const cities = getCities();
-  const guides = getGuidesByCluster("livsstil").slice(0, 3);
+  const guides = getGuidesByCluster("livsstil").slice(0, 3).map(toGuideSummary);
 
   return (
     <>

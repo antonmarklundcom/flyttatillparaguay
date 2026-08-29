@@ -5,6 +5,7 @@ import { PageHero } from "@/components/marketing/PageHero";
 import { ButtonLink } from "@/components/ui/Button";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { toGuideSummary } from "@/lib/content";
 import { getGuidesByCluster } from "@/lib/mdx";
 import { breadcrumbSchema, buildMetadata } from "@/lib/seo";
 
@@ -52,7 +53,7 @@ const comparison = [
 ];
 
 export default function PlanBPage() {
-  const guides = getGuidesByCluster("planb").slice(0, 3);
+  const guides = getGuidesByCluster("planb").slice(0, 3).map(toGuideSummary);
 
   return (
     <>

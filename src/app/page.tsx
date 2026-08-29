@@ -16,6 +16,7 @@ import { ButtonLink } from "@/components/ui/Button";
 import { ImageSlot } from "@/components/ui/ImageSlot";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { toGuideSummary } from "@/lib/content";
 import { getGuides } from "@/lib/mdx";
 import { buildMetadata } from "@/lib/seo";
 import { whatsappUrl } from "@/lib/site";
@@ -108,7 +109,7 @@ const faq = [
 ];
 
 export default function HomePage() {
-  const latestGuides = getGuides().slice(0, 3);
+  const latestGuides = getGuides().slice(0, 3).map(toGuideSummary);
 
   return (
     <>

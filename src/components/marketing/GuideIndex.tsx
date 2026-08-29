@@ -5,7 +5,7 @@ import { useMemo, useState } from "react";
 import { strings } from "@content/strings";
 
 import { ArticleCard } from "@/components/marketing/ArticleCard";
-import { CLUSTERS, type Cluster, type Guide } from "@/lib/content";
+import { CLUSTERS, type Cluster, type GuideSummary } from "@/lib/content";
 
 /**
  * Guideindex med clusterfilter (plan.md §3C).
@@ -13,18 +13,18 @@ import { CLUSTERS, type Cluster, type Guide } from "@/lib/content";
  * Filtret körs i klienten på en redan serverrenderad lista — alla artiklar
  * finns i HTML:en, så indexet är fullt indexerbart och fungerar utan JS.
  */
-export function GuideIndex({ guides }: { guides: Guide[] }) {
+export function GuideIndex({ guides }: { guides: GuideSummary[] }) {
   const [active, setActive] = useState<Cluster | "alla">("alla");
 
   const available = useMemo(() => {
-    const used = new Set(guides.map((guide) => guide.frontmatter.cluster));
+    const used = new Set(guides.map((guide) => guide.cluster));
     return CLUSTERS.filter((cluster) => used.has(cluster));
   }, [guides]);
 
   const visible =
     active === "alla"
       ? guides
-      : guides.filter((guide) => guide.frontmatter.cluster === active);
+      : guides.filter((guide) => guide.cluster === active);
 
   return (
     <div>

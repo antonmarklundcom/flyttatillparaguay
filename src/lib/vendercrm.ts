@@ -8,7 +8,7 @@ import crypto from "node:crypto";
  *     fetch från webbläsaren mot CRM:et (endpointen skickar medvetet inga
  *     CORS-headers).
  *  2. `sendLead` kastar aldrig. En besökare som fyllt i ett formulär ska
- *     alltid få sin tacksida — ett misslyckat CRM-anrop är vårt problem,
+ *     alltid få sin bekräftelse — ett misslyckat CRM-anrop är vårt problem,
  *     inte deras.
  */
 

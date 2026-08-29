@@ -28,7 +28,7 @@ export function StatRow({
       className={`grid divide-y border-y sm:grid-cols-2 sm:divide-x lg:grid-cols-4 ${divider} ${border} sm:divide-y-0`}
     >
       {stats.map((stat) => (
-        <div key={stat.label} className="px-1 py-6 sm:px-6 first:sm:pl-0">
+        <div key={stat.label} className="px-1 py-6 sm:px-6 sm:first:pl-0">
           <dt className="sr-only">{stat.label}</dt>
           <dd>
             <p className={`font-display text-display-sm ${value}`}>{stat.value}</p>

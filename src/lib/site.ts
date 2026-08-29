@@ -18,8 +18,6 @@ export const leadSource = "flyttatillparaguay.se";
 export const whatsappNumber =
   process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "595000000000";
 
-export const whatsappIsPlaceholder = !process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
-
 export function whatsappUrl(message?: string): string {
   const digits = whatsappNumber.replace(/\D/g, "");
   const text = message ? `?text=${encodeURIComponent(message)}` : "";

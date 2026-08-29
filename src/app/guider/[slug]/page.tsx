@@ -12,7 +12,7 @@ import { MdxContent } from "@/components/mdx/MdxContent";
 import { NewsletterForm } from "@/components/forms/NewsletterForm";
 import { ImageSlot } from "@/components/ui/ImageSlot";
 import { JsonLd } from "@/components/ui/JsonLd";
-import type { Cluster } from "@/lib/content";
+import { toGuideSummary, type Cluster } from "@/lib/content";
 import type { LeadFormId } from "@/lib/lead";
 import { getGuide, getGuides } from "@/lib/mdx";
 import { breadcrumbSchema, buildMetadata, faqSchema } from "@/lib/seo";
@@ -89,7 +89,8 @@ export default async function GuidePage({ params }: PageProps<"/guider/[slug]">)
       (item) =>
         fm.related.includes(item.slug) || item.frontmatter.cluster === fm.cluster,
     )
-    .slice(0, 3);
+    .slice(0, 3)
+    .map(toGuideSummary);
 
   const articleSchema = {
     "@context": "https://schema.org",

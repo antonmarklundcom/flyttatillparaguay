@@ -186,6 +186,23 @@ schema, genererad OG-bild. `.env.example` komplett.
   sorterar display-utilities inbördes, inte efter attributordning. Dölj via en
   wrapper.
 
+**Pre-handoff-audit (§4.9).** Adversarial genomläsning av den egna diffen gav
+fem fynd, alla fixade före merge:
+1. `first:sm:pl-0` i StatRow kompilerade till en regel **utan** media query —
+   Tailwind sväljer `sm:` när variantordningen är fel. Rätt ordning är
+   `sm:first:`. Verifierat i den byggda CSS:en.
+2. Clusterfiltret på `/guider` är en klientkomponent och fick hela `Guide`-
+   objekt, inklusive `body`. Med 32 artiklar hade all brödtext serialiserats
+   ner i klientpayloaden. Ny typ `GuideSummary` + `toGuideSummary()`; kortet
+   tar aldrig en hel `Guide`.
+3. `.fp-reveal` startade på `opacity: 0` och blev synlig först när
+   IntersectionObserver kört — utan JavaScript var allt under heron osynligt.
+   Åtgärdat med `@media (scripting: none)` plus en `<noscript>`-regel.
+4. `/tack` var död kod: inget länkade dit, formulären visar inline-bekräftelse
+   (som fungerar utan JS via server-actionen) och robots blockerade sidan.
+   Borttagen — lägg till den medvetet om annonskonvertering ska mätas på URL.
+5. Småskräp: död `<span>` i ArticleCard, oanvänd export `whatsappIsPlaceholder`.
+
 **Var opus-2 ska titta först.** `content/strings.ts` (all UI-copy), `content/
 packages.ts` (paketstruktur), `src/lib/content.ts` (frontmatter-kontraktet som
 de 32 stubbarna måste följa) och `src/lib/lead.ts` (`LEAD_FORM_IDS`). Sidorna
