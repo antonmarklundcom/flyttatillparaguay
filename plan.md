@@ -152,7 +152,45 @@ Skills: `higgsfield-web-imagery`, `nextjs-deploy-hostinger`, `gbp-optimizer` (en
 
 ## §9. Bygglogg & handoff
 
-(tom — varje fas lägger sin post här före merge)
+### 2026-08-29 — fas opus-1 (Foundation & designsystem), PR #1
+
+**Vad som nu finns.** Next.js 16 App Router + TypeScript + Tailwind v4, byggbar
+för Hostinger med `npm run build` / `npm start` från commit 1. Design-tokens
+enligt §3D i `src/app/globals.css` (skogsgrön/terracotta/cream/mörkbrun,
+Fraunces + Inter via `next/font`, radie-, skugg- och displayskala). Hela
+komponentbiblioteket från §5.1 finns och demonstreras på hemsidans skelett.
+MDX-pipeline (`content/guider/`, `content/stader/`) med validerad frontmatter
+och typad cluster-enum, två testguider och en ortsprofil. Lead-route
+`/api/lead` + server action, båda genom `lib/lead.ts`. Samtliga §3A-routes
+svarar. `sitemap.ts`, `robots.ts`, Organization/WebSite/Breadcrumb/FAQ/Article-
+schema, genererad OG-bild. `.env.example` komplett.
+
+**Beslut och avvikelser.**
+- *MDX utan wrapperbibliotek.* `@mdx-js/mdx` (`compile` + `run`) direkt i stället
+  för next-mdx-remote — färre peer-beroenden att hålla i takt med Next/React.
+- *Formulären går via en server action, inte klient-fetch.* De fungerar utan
+  JavaScript. `/api/lead` finns kvar som programmatisk ingång; båda delar
+  `processLead`, så payloaden mot VenderCRM är identisk.
+- *Nyhetsbrevet kräver telefon.* VenderCRM använder numret som kontaktidentitet.
+  Se KNOWN-ISSUES #1 — lös det inte genom att röra lead-routen (§4.7).
+- *Paketpriser lämnas som "Offert".* Ett påhittat pris på en säljsida är värre än
+  inget pris; `content/packages.ts` bär `priceIsPlaceholder`-flaggan.
+- *Ingen `@tailwindcss/typography`.* `.prose` är handskriven mot tokens, så varje
+  värde i brödtexten kommer från designsystemet.
+
+**Fällor värda att komma ihåg.**
+- Basstilar i `globals.css` MÅSTE ligga i `@layer base`. Olagrad CSS vinner över
+  cascade layers, så ett olagrat `h2 { color }` slår ut `text-sand-50` på mörk
+  bakgrund. Kostade en runda här.
+- `hidden` på en `ButtonLink` förlorar mot basklassen `inline-flex` — Tailwind
+  sorterar display-utilities inbördes, inte efter attributordning. Dölj via en
+  wrapper.
+
+**Var opus-2 ska titta först.** `content/strings.ts` (all UI-copy), `content/
+packages.ts` (paketstruktur), `src/lib/content.ts` (frontmatter-kontraktet som
+de 32 stubbarna måste följa) och `src/lib/lead.ts` (`LEAD_FORM_IDS`). Sidorna
+har platshållarcopy markerad med "Platshållartext" — `grep -rn "Platshållar"
+src/` listar allt som ska ersättas.
 
 ## §10. Backlogg
 
