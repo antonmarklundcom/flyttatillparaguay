@@ -152,7 +152,29 @@ Skills: `higgsfield-web-imagery`, `nextjs-deploy-hostinger`, `gbp-optimizer` (en
 
 ## §9. Bygglogg & handoff
 
-(tom — varje fas lägger sin post här före merge)
+### 2026-08-31 — opus-1 (Foundation & designsystem)
+
+- **Fas:** opus-1, branch `claude/steg-2-qtsqtc` (sessionens tilldelade branch i stället för `phase/opus-1`).
+- **Vad finns nu:** Next.js 15 App Router + TypeScript + Tailwind v4, byggbart för Hostinger
+  (`npm run build` / `npm start`). Designtokens (§3D) i `app/globals.css` som `@theme` —
+  skogsgrön/terracotta/cream, Fraunces + Inter via `next/font`. Komponentbibliotek i
+  `components/`: header/nav, footer, split-hero, bento-grid, processtidslinje, stat-rad,
+  artikelkort, FAQ-accordion, CTA-block, sticky mobil-CTA, lead- och nyhetsbrevsformulär,
+  `ImageSlot` för tomma bildslottar. MDX-pipeline i `lib/content.ts` (frontmatter valideras
+  vid bygge, `draft: true` döljs i produktion och sätter noindex). Lead-route
+  `app/api/lead/route.ts` + `lib/vendercrm.ts`. Alla §3A-routes som skelett, `sitemap.ts`,
+  `robots.ts`, `lib/seo.ts` (canonical/OG + Organization/FAQPage/Article-schema),
+  `content/strings.ts` för all UI-copy.
+- **Beslut/avvikelser:** Ortsprofilerna ligger på `/livet-i-paraguay/<slug>` (§3A angav ingen
+  URL). `/tack` tillagd som kvittenssida (noindex). Ingen typography-plugin — brödtext styrs av
+  `.prose-editorial` i globals.css, som är kontraktet mellan MDX och designsystemet.
+  Lead-routen kvitterar alltid `ok` mot besökaren; fel loggas serverside (skill-regel 5).
+- **Verifierat:** build grön, alla routes 200 (404 för okänd URL), lead-route degraded mode
+  loggar korrekt payload utan nyckel, Article/FAQPage/Organization-schema renderas, sitemap
+  innehåller 11 URL:er inkl. testguiden.
+- **Nästa fas (opus-2) tittar först på:** `content/strings.ts` + `content/packages.ts` (copy och
+  paketstruktur), `app/residency/page.tsx` (money page-skelettet som ska fyllas), `lib/content.ts`
+  för frontmatter-kontraktet innan de 32 MDX-stubbarna skapas, och `KNOWN-ISSUES.md`.
 
 ## §10. Backlogg
 
