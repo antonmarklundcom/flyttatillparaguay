@@ -44,17 +44,50 @@ export function pageMetadata({
 export function organizationSchema() {
   return {
     "@context": "https://schema.org",
-    "@type": "Organization",
+    "@type": "ProfessionalService",
     name: site.name,
     url: site.url,
     email: site.email,
     description:
       "Hjälper svenskar att få residency i Paraguay — process, dokument och ombud på plats.",
+    slogan: "Residency i Paraguay — hela vägen, på svenska.",
     founder: {
       "@type": "Person",
       name: site.author.name,
+      jobTitle: site.author.role,
     },
-    areaServed: ["SE", "PY"],
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Asunción",
+      addressCountry: "PY",
+    },
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        contactType: "customer support",
+        email: site.email,
+        availableLanguage: ["sv", "es", "en"],
+      },
+    ],
+    knowsLanguage: ["sv", "es"],
+    areaServed: [
+      { "@type": "Country", name: "Sverige" },
+      { "@type": "Country", name: "Paraguay" },
+    ],
+  };
+}
+
+/** Brödsmulor för hubb- och artikelsidor (nextjs-national-lead-gen §3). */
+export function breadcrumbSchema(items: { name: string; path: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: `${site.url}${item.path}`,
+    })),
   };
 }
 

@@ -176,6 +176,39 @@ Skills: `higgsfield-web-imagery`, `nextjs-deploy-hostinger`, `gbp-optimizer` (en
   paketstruktur), `app/residency/page.tsx` (money page-skelettet som ska fyllas), `lib/content.ts`
   för frontmatter-kontraktet innan de 32 MDX-stubbarna skapas, och `KNOWN-ISSUES.md`.
 
+### 2026-09-07 — opus-2 (Money pages & innehållsarkitektur)
+
+- **Fas:** opus-2, branch `claude/opus-2-corepages-prompt-yxrauf` (sessionens tilldelade branch
+  i stället för `phase/opus-2`).
+- **Vad finns nu:** Färdig svensk copy i Antons röst på hemsidan, `/residency` (process, krav
+  och dokument, paket, ett eget "det här ingår inte"-avsnitt, riskavsnitt, 8 FAQ), `/om`
+  (hela storyn + fyra principer), `/kontakt`, `/plan-b` (hubb med jämförelsetabell Paraguay/
+  Panama/Portugal/Dubai och tre myter), `/integritetspolicy` och `/villkor` — samt, utöver
+  planens lista, `/fastigheter` och `/livet-i-paraguay`, som annars hade legat kvar med
+  platshållartext eftersom ingen senare fas äger dem. Ingen lorem finns kvar på sajten.
+  Innehållsarkitekturen är på plats: 32 guide-stubbar i `content/guider/` och 5 ortsprofiler
+  i `content/stader/`, alla med giltig frontmatter, `relatedSlugs`-länkplan och `draft: true`,
+  och med vinkel, sökintention, disposition och länkplan i brödtexten. `NewsletterPanel`
+  tillagd i `components/blocks.tsx` och placerad i artikelslutet (plan §3C).
+- **Beslut/avvikelser:** opus-1:s testguide `exempelguide-residency.mdx` är borttagen — den
+  kannibaliserade `residency-i-paraguay-komplett-guide` och pipelinen bevisas nu av de riktiga
+  filerna. `organizationSchema()` är uppgraderad till `ProfessionalService` (subtyp av
+  Organization) med adress, kontaktpunkt och språk; `breadcrumbSchema()` tillagd och använd på
+  guidesidorna. Paketstrukturen behölls från opus-1, copyn skrevs om, priserna kvar som
+  `TODO-ANTON`. Skatteinnehåll bär `strings.disclaimers.tax`; Plan B-sidan är
+  möjlighetsorienterad och dejting/relationer ligger kvar i livsstilsklustret, inte i navet.
+- **Verifierat:** `npm run build` grön, alla 13 kontrollerade routes 200 i produktionsläge,
+  251 interna länkar validerade utan en enda 404, JSON-LD parsar på hem/`/residency`/guide
+  (FAQPage, ProfessionalService, Article, BreadcrumbList), draft-guider får
+  `noindex, nofollow` och hålls utanför sitemap (10 URL:er), och lead-routen kvitterar `ok`
+  med rätt `source`/`fields.formId` för alla fyra formId: `residency`, `fastigheter`,
+  `kontakt`, `nyhetsbrev` (honeypot tyst, saknad telefon 422).
+- **Nästa fas (sonnet-3) tittar först på:** en godtycklig fil i `content/guider/` — varje stub
+  innehåller vinkel, sökintention, disposition och länkplan som är hela uppdraget. Därefter
+  `content/strings.ts` (röst och disclaimers), `components/mdx.tsx` (vilka komponenter som får
+  användas i MDX) och `KNOWN-ISSUES.md`. Rör inte tokens, layout, lead-route, MDX-pipeline
+  eller URL-struktur (§4.7).
+
 ## §10. Backlogg
 
 - Egen fastighetslistning med DB (då: `nodejs-mysql-hostinger-stack` fullt ut).

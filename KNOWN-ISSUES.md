@@ -18,3 +18,15 @@ Mindre, icke-blockerande problem enligt autonomiprotokollet §4.3.
   är statiskt och sidan är snabb, men den prerenderas inte. Kan bytas mot statiska
   `/guider/[cluster]`-routes om det behövs — kräver URL-beslut, alltså inte en sonnet-fas.
   Upptäckt: opus-1.
+- **WhatsApp-numret är en platshållare** (`595000000000` i `content/site.ts`). Alla
+  WhatsApp-CTA:er går därför ingenstans tills Anton lämnar det riktiga numret (plan §7).
+  Byt värdet på ett ställe, eller sätt `NEXT_PUBLIC_WHATSAPP_NUMBER`. Upptäckt: opus-2.
+- **Paketpriserna är riktmärken** (`TODO-ANTON` i `content/packages.ts`). Sidorna säger
+  uttryckligen att kunden får en skriftlig offert, så de kan ligga live — men de ska bytas
+  före lansering. Upptäckt: opus-2.
+- **Legal-sidorna är skrivna av mig, inte av jurist.** `/integritetspolicy` och `/villkor`
+  täcker det som faktiskt sker på sajten (GDPR-grunder, tredjelandsöverföring till Paraguay,
+  ångerrätt, ansvarsbegränsning), men bör granskas innan lansering. Upptäckt: opus-2.
+- **`/guider/[slug]` och `/livet-i-paraguay/[stad]` prerendereras inte i produktion** eftersom
+  alla poster ännu är `draft: true` — `generateStaticParams` returnerar tom lista. Löser sig
+  av sig självt när sonnet-3 tar bort draft-flaggorna. Upptäckt: opus-2.
