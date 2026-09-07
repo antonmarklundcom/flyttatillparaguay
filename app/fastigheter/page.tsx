@@ -77,17 +77,17 @@ const example = [
   {
     title: "Tomt utanför Asunción",
     description:
-      "Ett par i fyrtioårsåldern köpte 1 000 m² i ett växande område en dryg timme från centrum, för ungefär vad en begagnad bil kostar i Sverige. Planen är hus om två år; tills dess står marken och kostar dem nästan ingenting i årliga avgifter.",
+      "Ett vanligt upplägg: 1 000 m² i ett växande område en dryg timme från centrum, för ungefär vad en begagnad bil kostar i Sverige. Hus om några år; tills dess står marken och kostar nästan ingenting i årliga avgifter.",
   },
   {
     title: "Färdigt hus i San Bernardino",
     description:
-      "En ensamstående man ville ha nyckelfärdigt och nära vatten. Vi lade tre veckor på juridisk kontroll av en fastighet som såg perfekt ut, hittade en oklarhet i ägarhistoriken och gick vidare till nästa. Det andra huset gick igenom kontrollen och är hans idag.",
+      "Vill man ha nyckelfärdigt och nära vatten kan kontrollen ta veckor. Ser fastigheten perfekt ut men ägarhistoriken har en oklarhet går man vidare till nästa — det är precis det steget man betalar för, och det är också därför det ibland tar tid.",
   },
   {
     title: "Lantbruksmark i Itapúa",
     description:
-      "Större areal med arrende till en lokal brukare. Avkastningen är blygsam jämfört med vad säljare brukar lova, men stabil — och marken har gått upp mer i värde än arrendet gav.",
+      "Större areal med arrende till en lokal brukare. Räkna med blygsam avkastning jämfört med vad säljare brukar lova — det är oftare värdeökningen än arrendet som gör affären.",
   },
 ];
 
@@ -143,8 +143,8 @@ export default function FastigheterPage() {
       <Section>
         <SectionHeading
           eyebrow="Exempel"
-          title="Tre köp, tre helt olika syften"
-          description="Detaljer är avidentifierade, siffrorna avrundade. De är med för att visa spännvidden — inte som löften om vad du hittar."
+          title="Tre typfall, tre helt olika syften"
+          description="Konstruerade exempel som visar spännvidden i vad folk faktiskt frågar efter — inte kundcase och inte löften om vad du hittar. Riktiga case publiceras när de finns och kunden sagt ja."
         />
         <div className="mt-10 grid gap-5 md:grid-cols-3">
           {example.map((item) => (
