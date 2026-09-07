@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import { strings } from "@/content/strings";
 import { whatsappUrl } from "@/content/site";
 import { ButtonLink, Card, Eyebrow, SectionHeading } from "@/components/ui";
+import { NewsletterForm } from "@/components/newsletter-form";
 import { formatDate, type Cluster, type Doc, type GuideFrontmatter } from "@/lib/content";
 
 /* ---------------------------------------------------------------- Split hero */
@@ -264,6 +265,32 @@ export function CtaBlock({
         </div>
       </div>
     </section>
+  );
+}
+
+/* ------------------------------------------------------ Nyhetsbrevspanel */
+
+/**
+ * Nyhetsbrevsfångst utanför footern (plan §3C: footer + artikelslut).
+ * Mörk yta eftersom NewsletterForm är byggd för ljus text på mörk bakgrund.
+ */
+export function NewsletterPanel({ className = "" }: { className?: string }) {
+  return (
+    <aside
+      className={`overflow-hidden rounded-(--radius-xl) bg-(--color-surface-deep) px-6 py-10 text-cream-100 md:px-10 ${className}`}
+    >
+      <div className="grid items-center gap-8 md:grid-cols-[1.3fr_1fr]">
+        <div>
+          <p className="font-(family-name:--font-display) text-2xl text-cream-50">
+            {strings.newsletter.title}
+          </p>
+          <p className="mt-3 max-w-md text-sm leading-relaxed text-cream-300">
+            {strings.newsletter.description}
+          </p>
+        </div>
+        <NewsletterForm />
+      </div>
+    </aside>
   );
 }
 

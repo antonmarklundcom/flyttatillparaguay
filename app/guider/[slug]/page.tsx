@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArticleCard, CtaBlock, Faq, Section } from "@/components/blocks";
+import { ArticleCard, CtaBlock, Faq, NewsletterPanel, Section } from "@/components/blocks";
 import { JsonLd } from "@/components/ui";
 import { Mdx } from "@/components/mdx";
 import { formatDate, getGuide, getGuides } from "@/lib/content";
 import { strings } from "@/content/strings";
-import { articleSchema, faqSchema, pageMetadata } from "@/lib/seo";
+import { articleSchema, breadcrumbSchema, faqSchema, pageMetadata } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -70,6 +70,10 @@ export default async function GuidePage({ params }: Props) {
       </article>
 
       <Section>
+        <NewsletterPanel />
+      </Section>
+
+      <Section>
         <CtaBlock
           title="Vill du gå från läsning till plan?"
           description="Ett samtal räcker för att veta om det här är rätt väg för dig."
@@ -99,6 +103,13 @@ export default async function GuidePage({ params }: Props) {
         })}
       />
       {frontmatter.faq?.length ? <JsonLd data={faqSchema(frontmatter.faq)} /> : null}
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Start", path: "/" },
+          { name: strings.guides.indexTitle, path: "/guider" },
+          { name: frontmatter.title, path: `/guider/${guide.slug}` },
+        ])}
+      />
     </>
   );
 }
